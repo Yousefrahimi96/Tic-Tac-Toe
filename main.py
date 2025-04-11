@@ -1,17 +1,20 @@
 import random
 
 class TicTacToe:
+    """A simple implementation of the Tic-Tac-Toe game."""
     def __init__(self):
         self.board = [" "] * 10
         self.player_turn = self.get_random_first_player()
     
     def get_random_first_player(self):
-        return 'X' if random.randint(0, 1) == 0 else 'O'
+        """Randomly selects the first player ('X' or 'O')."""
+        return 'O' if random.randint(0, 1) == 0 else 'X'
 
     def fix_spot(self, cell, player):
         self.board[cell] = player
 
     def has_player_won(self, player):
+        """Checks if the specified player has won the game."""
         win_combinations = [(1, 2, 3), (4, 5, 6), (7, 8, 9),
                             (1, 4, 7), (2, 5, 8), (3, 6, 9),
                             (1, 5, 9), (3, 5, 7)]
@@ -21,19 +24,26 @@ class TicTacToe:
         return False
 
     def is_board_filled(self):
+        """Check if the board is completely filled."""
         return ' ' not in self.board
 
     def swap_player_turn(self):
+        """Switch the turn to the other player."""
         self.player_turn = 'X' if self.player_turn == 'O' else 'O'
 
     def show_board(self):
-        print("\n")
-        rows = [[self.board[i+j] for i in range(1, 4)] for j in range(0, 7, 3)]
+        """Display the current state of the game board."""
+        print()
+        rows = [
+            [self.board[i + j] for i in range(1, 4)]
+            for j in range(0, 7, 3)
+        ]
         for row in rows:
             print(row)
-        print("\n")
+        print()
 
     def start(self):
+        """Start and manage the game loop."""
         while True:
             self.show_board()
             try:
